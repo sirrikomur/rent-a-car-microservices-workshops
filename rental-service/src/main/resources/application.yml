@@ -21,17 +21,6 @@ spring:
       circuitbreaker:
         enabled: true
 
-resilience4j:
-  retry:
-    instances:
-      check-is-car-available:
-        max-attempts: 6
-        wait-duration: 2s
-
-    metrics:
-      enabled: true
-      legacy:
-        enabled: true
 
 eureka:
   client:

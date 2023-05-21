@@ -1,12 +1,13 @@
-package com.kodlamaio.rentalservice.api.clients;
+package com.kodlamaio.rentalservice.api.clients.Car;
 
 import com.kodlamaio.commonpackage.utils.dto.ClientResponse;
+import com.kodlamaio.commonpackage.utils.enums.State;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 
@@ -15,4 +16,7 @@ public interface CarClient {
     @GetMapping(value = "/api/cars/check-car-available/{carId}")
     @Retry(name = "check-is-car-available")
     ClientResponse checkIfCarAvailable(@PathVariable UUID carId);
+
+    @PutMapping("/api/cars/{id}/change-state")
+    void changeState(@PathVariable UUID id, @RequestBody State state);
 }
