@@ -76,6 +76,7 @@ public class MaintenanceManager implements MaintenanceService
         maintenance.setEndDate(null);
         repository.save(maintenance);
         carClient.changeState(request.getCarId(), State.Maintenance);
+
         CreateMaintenanceResponse response = mapper.forResponse().map(maintenance, CreateMaintenanceResponse.class);
 
         return response;

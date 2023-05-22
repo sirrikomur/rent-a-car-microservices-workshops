@@ -1,5 +1,6 @@
 package com.kodlamaio.filterservice.business.concretes;
 
+import com.kodlamaio.commonpackage.utils.enums.State;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
 import com.kodlamaio.filterservice.business.abstracts.FilterService;
 import com.kodlamaio.filterservice.business.dto.responses.GetAllFiltersResponse;
@@ -65,5 +66,12 @@ public class FilterManager implements FilterService {
     @Override
     public Filter getByCarId(UUID carId) {
         return repository.findByCarId(carId);
+    }
+
+    @Override
+    public void updateCarStateByCarId(UUID carId, State state) {
+        var filter = repository.findByCarId(carId);
+        filter.setState(String.valueOf(state));
+        repository.save(filter);
     }
 }

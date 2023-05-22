@@ -1,5 +1,6 @@
 package com.kodlamaio.inventoryservice.business.concretes;
 
+import com.kodlamaio.commonpackage.events.inventory.CarStateUpdatedEvent;
 import com.kodlamaio.commonpackage.events.inventory.CarCreatedEvent;
 import com.kodlamaio.commonpackage.events.inventory.CarDeletedEvent;
 import com.kodlamaio.commonpackage.utils.dto.ClientResponse;
@@ -92,6 +93,8 @@ public class CarManager implements CarService {
     @Override
     public void changeStateByCarId(State state, UUID id) {
         repository.changeStateByCarId(state, id);
+
+        producer.sendMessage(new CarStateUpdatedEvent(id, state), "car-state-updated");
     }
 
     private void sendKafkaCarCreatedEvent(Car createdCar) {

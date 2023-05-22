@@ -1,5 +1,6 @@
 package com.kodlamaio.filterservice.business.abstracts;
 
+import com.kodlamaio.commonpackage.utils.enums.State;
 import com.kodlamaio.filterservice.business.dto.responses.GetAllFiltersResponse;
 import com.kodlamaio.filterservice.business.dto.responses.GetFilterResponse;
 import com.kodlamaio.filterservice.entities.Filter;
@@ -16,4 +17,5 @@ public interface FilterService {
     void deleteAllByBrandId(UUID brandId);
     void deleteAllByModelId(UUID modelId);
     Filter getByCarId(UUID carId);
+    void updateCarStateByCarId(UUID carId, State state);
 }
